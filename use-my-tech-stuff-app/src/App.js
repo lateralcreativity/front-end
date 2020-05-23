@@ -4,6 +4,10 @@ import Login from './componets/Login'
 import Registration from './componets/Registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+function registrationHandler(event) {
+  event.preventDefault();
+}
+
 function App() {
   return (
     <div className="App">
@@ -14,7 +18,9 @@ function App() {
         </Route>
 
         <Route path='/register'>
-          <Registration />
+          <Registration 
+          registrationHandler={registrationHandler}
+          />
         </Route>
       </Switch>
     </Router>

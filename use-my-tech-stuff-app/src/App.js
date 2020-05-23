@@ -4,8 +4,14 @@ import Login from './componets/Login'
 import Registration from './componets/Registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+
 import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
+
+function registrationHandler(event) {
+  event.preventDefault();
+}
+
 
 function App() {
   return (
@@ -16,12 +22,22 @@ function App() {
           <Route path='/login'>
             <Login />
           </Route>
+    
 
           <Route path='/register'>
             <Registration />
           </Route>
         </Switch>
       </Router>
+
+        <Route path='/register'>
+          <Registration 
+          registrationHandler={registrationHandler}
+          />
+        </Route>
+      </Switch>
+    </Router>
+
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from './componets/Login'
+import Registration from './componets/Registration'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
        Header
       </header>
       <Login />
+      <Registration />
     </div>
   );
 }

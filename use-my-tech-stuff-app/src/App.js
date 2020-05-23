@@ -4,20 +4,24 @@ import Login from './componets/Login'
 import Registration from './componets/Registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import NavBar from './componets/NavBar'
+import RentalsList from './componets/RentalsList'
+
 function App() {
   return (
     <div className="App">
-    <Router>
-      <Switch>
-        <Route path='/login'>
+      <NavBar />
+      <Router>
+        <Switch>
+          <Route path='/login'>
             <Login />
-        </Route>
+          </Route>
 
-        <Route path='/register'>
-          <Registration />
-        </Route>
-      </Switch>
-    </Router>
+          <Route path='/register'>
+            <Registration />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

@@ -8,9 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
 
-function registrationHandler(event) {
-  event.preventDefault();
-}
+
 
 
 function App() {
@@ -24,9 +22,7 @@ function App() {
           </Route>
 
           <Route path='/register'>
-            <Registration
-              registrationHandler={registrationHandler}
-            />
+            <Registration />
           </Route>
         </Switch>
       </Router>

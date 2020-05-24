@@ -22,22 +22,14 @@ function App() {
           <Route path='/login'>
             <Login />
           </Route>
-    
 
           <Route path='/register'>
-            <Registration />
+            <Registration
+              registrationHandler={registrationHandler}
+            />
           </Route>
         </Switch>
       </Router>
-
-        <Route path='/register'>
-          <Registration 
-          registrationHandler={registrationHandler}
-          />
-        </Route>
-      </Switch>
-    </Router>
-
     </div>
   );
 }

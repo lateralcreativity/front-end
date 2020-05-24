@@ -4,12 +4,14 @@ import CameraIcon from '@material-ui/icons/PhotoCamera';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
      icon: {
        marginRight: theme.spacing(2),
+       verticalAlign: 'middle'
      },
      heroContent: {
        backgroundColor: theme.palette.background.paper,
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
      footer: {
        backgroundColor: theme.palette.background.paper,
        padding: theme.spacing(6),
-     },
+     }
    }));
 
    const NavBar = () => {
@@ -35,11 +37,15 @@ const useStyles = makeStyles((theme) => ({
         return (
           <React.Fragment>
           <CssBaseline />
-          <AppBar position="relative">
-            <Toolbar>
-              <CameraIcon className={classes.icon} />
-              <Typography variant="h6" color="inherit" noWrap>
+          <AppBar>
+            <Toolbar style={{width: '100%', justifyContent: 'space-between'}}>
+              <Typography variant="h6" color="inherit">
+              <CameraIcon className={classes.icon}/>
                 NavBar
+              </Typography>
+              <Typography>
+                <Button color="inherit" href="/login">Login</Button>
+                <Button color="inherit" href="/register">Register</Button>
               </Typography>
             </Toolbar>
           </AppBar>

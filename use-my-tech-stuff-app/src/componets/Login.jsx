@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import * as yup from 'yup';
 import loginSchema from '../validation/loginSchema';
+import backgroundImage from '../images/technology-hero-image.jpg';
 
 function Copyright() {
   return (
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(../public/images/technology-hero-image.jpg)',
+    backgroundImage: `url('${backgroundImage}')`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],

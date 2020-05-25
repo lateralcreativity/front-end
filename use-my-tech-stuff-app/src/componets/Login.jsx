@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import * as yup from 'yup';
+import loginSchema from '../validation/loginSchema';
+import backgroundImage from '../images/technology-hero-image.jpg';
 
 function Copyright() {
   return (
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(../public/images/technology-hero-image.jpg)',
+    backgroundImage: `url('${backgroundImage}')`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -55,11 +58,76 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  error: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
 }));
+
+// -------- Initial Form Values -------- 
+const initialFormErrors = {
+  email: '',
+  password: ''
+}
+
+const initialFormValues = {
+  email: '',
+  password: ''
+}
+
+const initialDisabled = true;
+// -------- Initial Form Values End -------- 
 
 export default function Login() {
   const classes = useStyles();
+  // -------- State -------- 
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const [disabled, setDisabled] = useState(initialDisabled)
+  // -------- State Ends -------- 
 
+  // -------- Handlers -------- 
+  function loginHandler(event) {
+    event.preventDefault();
+
+    setFormValues(initialFormValues)
+  }
+
+  function inputHandler(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    yup
+    .reach(loginSchema, name)
+    .validate(value)
+    .then(valid => {
+      setFormErrors({
+        ...formErrors,
+        [name]: ''
+      })
+    })
+    .catch(error => {
+      setFormErrors({
+        ...formErrors,
+        [name]: error.errors[0]
+      })
+    })
+
+    setFormValues({
+      ...formValues,
+      [name]: value
+    })
+  }
+  // -------- Handlers End -------- 
+
+  // -------- Disable Submit Checker -------- 
+  useEffect(() => {
+    loginSchema.isValid(formValues)
+      .then(valid => {
+        setDisabled(!valid)
+      })
+  }, [formValues])
+  // ---------------------------------------- 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -72,7 +140,17 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+
+          {/* -------- Login Errors Render --------  */}
+          <Typography className={classes.error} component="p">
+            {formErrors.email}
+          </Typography>
+          <Typography className={classes.error} component="p">
+            {formErrors.password}
+          </Typography>
+          {/* -------- Login Errors Render Ends --------  */}
+
+          <form className={classes.form} onSubmit={loginHandler} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -82,7 +160,9 @@ export default function Login() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={formValues.email}
               autoFocus
+              onInput={inputHandler}
             />
             <TextField
               variant="outlined"
@@ -94,6 +174,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={formValues.password}
+              onInput={inputHandler}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -106,6 +188,7 @@ export default function Login() {
               color="primary"
               className={classes.submit}
               href="/"
+              disabled={disabled}
             >
               Sign In
             </Button>

@@ -74,12 +74,12 @@ const useStyles = makeStyles((theme) => ({
 
 // -------- Initial Form Values -------- 
 const initialFormErrors = {
-  email: '',
+  username: '',
   password: ''
 }
 
 const initialFormValues = {
-  email: '',
+  username: '',
   password: ''
 }
 
@@ -171,7 +171,7 @@ export default function Login() {
 
           {/* -------- Login Errors Render --------  */}
           <Typography className={classes.error} component="p">
-            {formErrors.email}
+            {formErrors.username}
           </Typography>
           <Typography className={classes.error} component="p">
             {formErrors.password}
@@ -184,11 +184,10 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={formValues.email}
+              id="username"
+              label="Username"
+              name="username"
+              value={formValues.username}
               autoFocus
               onInput={inputHandler}
             />
@@ -215,7 +214,6 @@ export default function Login() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="/"
               disabled={disabled}
               onClick={loginHandler}
             >

@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-;
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
      card: {
@@ -31,6 +31,12 @@ const ListItem = props => {
      } = props
 
      const classes = useStyles();
+     const history = useHistory()
+
+     const viewDetails = e => {
+       e.preventDefault()
+       history.push(`/rentals/${listItem.id}`)
+     }
 
 
 return (
@@ -53,8 +59,8 @@ return (
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
-                      <span>
+                    <Button size="small" color="primary" id={listItem.id} variant='contained' onClick={viewDetails}>
+                      <span id={listItem.id}>
                         View
                       </span>
                     </Button>

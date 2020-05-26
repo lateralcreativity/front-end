@@ -111,6 +111,7 @@ export default function Login() {
         console.log(response)
           //response.data.payload is the key(token) that comes from server.js
           localStorage.setItem('token', response.token)
+          localStorage.setItem('userId', response.data.data.id)
           setIsLoggingIn(false)
           history.push('/')
       })

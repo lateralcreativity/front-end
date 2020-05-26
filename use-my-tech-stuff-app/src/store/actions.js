@@ -8,6 +8,11 @@ export const DELETE_RENTAL_ITEM_START = 'DELETE_RENTAL_ITEM_START'
 export const DELETE_RENTAL_ITEM_SUCCESS = 'DELETE_RENTAL_ITEM_SUCCESS'
 export const DELETE_RENTAL_ITEM_FAILURE = 'DELETE_RENTAL_ITEM_FAILURE'
 
+export const FETCH_SINGLE_ITEM_START = 'FETCH_SINGLE_ITEM_START'
+export const FETCH_SINGLE_ITEM_SUCCESS = 'FETCH_SINGLE_ITEM_SUCCESS'
+export const FETCH_SINGLE_ITEM_FAILURE = 'FETCH_SINGLE_ITEM_FAILURE'
+
+
 export const fetchRentalsList = () => {
      return dispatch => {
           dispatch({ type: FETCH_RENTALSLIST_START })
@@ -36,6 +41,22 @@ export const deleteRentalItem = (itemId) => {
                .catch(err => {
                     console.log(err)
                     dispatch({ type: DELETE_RENTAL_ITEM_FAILURE, payload: err })
+               })
+     }
+}
+
+export const fetchSingleItem = (id) => {
+     return dispatch => {
+          dispatch({ type: FETCH_SINGLE_ITEM_START })
+          axiosWithAuth()
+               .get(`/api/listings/${id}`)
+               .then(response => {
+                    console.log(response.data)
+                    dispatch({ type: FETCH_SINGLE_ITEM_SUCCESS, payload: response.data })
+               })
+               .catch(err => {
+                    console.log(err)
+                    dispatch({ type: FETCH_SINGLE_ITEM_FAILURE, payload: err })
                })
      }
 }

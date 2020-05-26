@@ -5,7 +5,10 @@ import {
      FETCH_RENTALSLIST_FAILURE,
      DELETE_RENTAL_ITEM_FAILURE,
      DELETE_RENTAL_ITEM_START,
-     DELETE_RENTAL_ITEM_SUCCESS
+     DELETE_RENTAL_ITEM_SUCCESS,
+     FETCH_SINGLE_ITEM_START,
+     FETCH_SINGLE_ITEM_SUCCESS,
+     FETCH_SINGLE_ITEM_FAILURE
 } from '../store/actions'
 
 
@@ -16,6 +19,7 @@ const initialState = {
      error: false,
      errorMessage: '',
      deleteMessage: '',
+     singleItem: {},
 }
 
 export const reducer = (state = initialState, action) => {
@@ -65,6 +69,28 @@ export const reducer = (state = initialState, action) => {
                     error: true,
                     errorMessage: action.payload,
                     deleteMessage: '',
+               }
+          case FETCH_SINGLE_ITEM_START:
+               return {
+                    ...state,
+                    isFetching: true,
+                    error: false,
+                    errorMessage: '',
+               }
+          case FETCH_SINGLE_ITEM_SUCCESS:
+               return {
+                    ...state,
+                    singleItem: action.payload,
+                    isFetching: false,
+                    error: false,
+                    errorMessage: '',
+               }
+          case FETCH_SINGLE_ITEM_FAILURE:
+               return {
+                    ...state,
+                    isFetching: false,
+                    error: true,
+                    errorMessage: action.payload
                }
           default:
                return state

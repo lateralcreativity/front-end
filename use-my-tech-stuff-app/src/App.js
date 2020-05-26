@@ -4,7 +4,7 @@ import Login from './componets/Login'
 import Registration from './componets/Registration'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-
+import PrivateRoute from './componets/PrivateRoute'
 import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
 
@@ -17,6 +17,8 @@ function App() {
       <NavBar />
       <Router>
         <Switch>
+          <PrivateRoute exact path='/rentals' component={RentalsList} />
+          
           <Route path='/login'>
             <Login />
           </Route>
@@ -24,6 +26,8 @@ function App() {
           <Route path='/register'>
             <Registration />
           </Route>
+
+
         </Switch>
       </Router>
     </div>

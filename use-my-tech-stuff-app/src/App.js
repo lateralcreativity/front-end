@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PrivateRoute from './componets/PrivateRoute'
 import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
+import HomePage from './componets/HomePage'
 
 
 
@@ -18,7 +19,8 @@ function App() {
       <Router>
         <Switch>
           <PrivateRoute exact path='/rentals' component={RentalsList} />
-          
+          <Route exact path='/' component={HomePage} />
+
           <Route path='/login'>
             <Login />
           </Route>

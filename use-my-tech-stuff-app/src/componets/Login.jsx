@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
+
+//styling imports
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,9 +16,12 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import backgroundImage from '../images/technology-hero-image.jpg';
+
+//form validation imports
 import * as yup from 'yup';
 import loginSchema from '../validation/loginSchema';
-import backgroundImage from '../images/technology-hero-image.jpg';
 
 function Copyright() {
   return (
@@ -29,6 +36,7 @@ function Copyright() {
   );
 }
 
+//material UI styling function
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -80,16 +88,36 @@ const initialDisabled = true;
 
 export default function Login() {
   const classes = useStyles();
+    //useHistory for .push
+    let history = useHistory()
   // -------- State -------- 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [formValues, setFormValues] = useState(initialFormValues)
   const [disabled, setDisabled] = useState(initialDisabled)
+  const [ isLoggingIn, setIsLoggingIn ] = useState(false)
   // -------- State Ends -------- 
 
   // -------- Handlers -------- 
   function loginHandler(event) {
     event.preventDefault();
-
+    setIsLoggingIn(true)
+         // make a POST request to the login endpoint
+         // _if_ the creds match what's in the database, the server will return a JSON web token
+         // set the token to localStorage (sessions)
+         // navigate the user to the "/protected" route
+    axiosWithAuth()
+      .post('/api/login', formValues)
+      .then(response => {
+        console.log(response)
+          //response.data.payload is the key(token) that comes from server.js
+          localStorage.setItem('token', response.data.payload)
+          setIsLoggingIn(false)
+          history.push('/rentals')
+      })
+      .catch(err => {
+        console.log(err)
+        setIsLoggingIn(false)
+      })
     setFormValues(initialFormValues)
   }
 
@@ -189,6 +217,7 @@ export default function Login() {
               className={classes.submit}
               href="/"
               disabled={disabled}
+              onClick={loginHandler}
             >
               Sign In
             </Button>
@@ -204,6 +233,9 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
+
+            {isLoggingIn && <CircularProgress />}
+            
             <Box mt={5}>
               <Copyright />
             </Box>

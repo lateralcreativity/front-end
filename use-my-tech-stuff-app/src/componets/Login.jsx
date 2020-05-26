@@ -106,13 +106,13 @@ export default function Login() {
          // set the token to localStorage (sessions)
          // navigate the user to the "/protected" route
     axiosWithAuth()
-      .post('/api/login', formValues)
+      .post('/api/auth/login', formValues)
       .then(response => {
         console.log(response)
           //response.data.payload is the key(token) that comes from server.js
-          localStorage.setItem('token', response.data.payload)
+          localStorage.setItem('token', response.token)
           setIsLoggingIn(false)
-          history.push('/rentals')
+          history.push('/')
       })
       .catch(err => {
         console.log(err)

@@ -52,6 +52,7 @@ function ListItemDetails(props) {
 
           //capture 
      const ownerId = localStorage.getItem('userId')
+     console.log(ownerId)
 
      const deleteHandler = e => {
           e.preventDefault()

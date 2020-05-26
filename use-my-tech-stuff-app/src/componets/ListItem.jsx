@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
      cardContent: {
        flexGrow: 1,
      },
+     cardActions: {
+       display: 'flex',
+       justifyContent: 'center',
+     }
    }));
 
 
@@ -58,16 +62,11 @@ return (
                       Price/Day: ${listItem.price_per_day_in_dollars}
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  <CardActions className={classes.cardActions}>
                     <Button size="small" color="primary" id={listItem.id} variant='contained' onClick={viewDetails}>
                       <span id={listItem.id}>
-                        View
+                        View Item Details
                       </span>
-                    </Button>
-                    <Button size="small" color="primary">
-                    <span>
-                      Edit
-                    </span>
                     </Button>
                   </CardActions>
                 </Card>

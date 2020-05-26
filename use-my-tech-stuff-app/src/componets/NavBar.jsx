@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
               <Typography variant="h6" color="inherit">
                 <Link href="/" color="inherit" style={{textDecoration: 'none'}}>
                   <EmojiPeopleIcon className={classes.icon} />
-                  Techpal
+                  TechPal
                 </Link>
               </Typography>
               <Typography>

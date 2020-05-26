@@ -23,9 +23,7 @@ function App() {
         <Switch>
           <PrivateRoute exact path='/rentals' component={RentalsList} />
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/rentals/:id' >
-            <ListItemDetails />
-          </Route>
+          <PrivateRoute exact path='/rentals/:id' component={ListItemDetails}/>
 
           <Route path='/login'>
             <Login />

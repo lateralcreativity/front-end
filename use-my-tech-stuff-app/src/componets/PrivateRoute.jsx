@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
 //Private Route rules:
@@ -7,7 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
 //3. It checks if the user is authenticated, if they are, it renders the component prop, otherwise they get redirected to login
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-     const token = locasStorage.getItem('token')
+     const token = localStorage.getItem('token')
      return (
           <Route
                {...rest}
@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                          return <Component />
                     } else {
                          //redirect to login
-                         return <Redirect to='/login'
+                         return <Redirect to='/login' />
                     }
                }}
           />

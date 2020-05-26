@@ -153,7 +153,7 @@ export default function Registration() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Register
         </Typography>
 
         {/* -------- Form Errors Render --------  */}

@@ -8,7 +8,9 @@ import PrivateRoute from './componets/PrivateRoute'
 import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
 import HomePage from './componets/HomePage'
+import UserProfile from './componets/UserProfile'
 import ListItemDetails from './componets/ListItemDetails'
+
 
 
 
@@ -33,8 +35,9 @@ function App() {
             <Registration />
           </Route>
 
-
-
+          <Route path='/profile'>
+            <UserProfile />
+          </Route>
 
         </Switch>
       </Router>

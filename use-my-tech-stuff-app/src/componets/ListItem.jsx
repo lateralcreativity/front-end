@@ -51,10 +51,14 @@ return (
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      View
+                      <span>
+                        View
+                      </span>
                     </Button>
                     <Button size="small" color="primary">
+                    <span>
                       Edit
+                    </span>
                     </Button>
                   </CardActions>
                 </Card>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -74,8 +76,11 @@ const initialFormValues = {
 const initialDisabled = true;
 // -------- Initial Form Values End -------- 
 
+const techPalURL = "https://techpal.herokuapp.com"
+
 export default function Registration() {
   const classes = useStyles();
+  const history = useHistory();
   
   // -------- State -------- 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
@@ -86,9 +91,23 @@ export default function Registration() {
   // -------- Handlers -------- 
   function registrationHandler(event) {
     event.preventDefault();
-
+    axios
+      .create({ headers: {'Content-Type': 'application/json'} })
+      .post(`${techPalURL}/api/auth/register`, formValues)
+      .then(response => {
+        console.log(response)
+        localStorage.setItem('token', response.data.token)
+        history.push(`/`)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     setFormValues(initialFormValues)
   }
+
+  useEffect(() => {
+    console.log(formValues)
+  },[formValues])
 
   function inputHandler(event) {
     const name = event.target.name;

@@ -9,6 +9,8 @@ import NavBar from './componets/NavBar'
 import RentalsList from './componets/RentalsList'
 import HomePage from './componets/HomePage'
 import UserProfile from './componets/UserProfile'
+import ListItemDetails from './componets/ListItemDetails'
+
 
 
 
@@ -21,6 +23,9 @@ function App() {
         <Switch>
           <PrivateRoute exact path='/rentals' component={RentalsList} />
           <Route exact path='/' component={HomePage} />
+          <Route exact path='/rentals/:id' >
+            <ListItemDetails />
+          </Route>
 
           <Route path='/login'>
             <Login />
@@ -33,6 +38,7 @@ function App() {
           <Route path='/profile'>
             <UserProfile />
           </Route>
+
         </Switch>
       </Router>
     </div>

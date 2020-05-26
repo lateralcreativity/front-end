@@ -1,17 +1,19 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
      icon: {
-       marginRight: theme.spacing(2),
-       verticalAlign: 'middle'
+       marginRight: theme.spacing(0.5),
+       verticalAlign: 'middle',
+       fontSize: '48px'
      },
      heroContent: {
        backgroundColor: theme.palette.background.paper,
@@ -40,8 +42,10 @@ const useStyles = makeStyles((theme) => ({
           <AppBar>
             <Toolbar style={{width: '100%', justifyContent: 'space-between'}}>
               <Typography variant="h6" color="inherit">
-              <CameraIcon className={classes.icon}/>
-                NavBar
+                <Link href="/" color="inherit" style={{textDecoration: 'none'}}>
+                  <EmojiPeopleIcon className={classes.icon} />
+                  Techpal
+                </Link>
               </Typography>
               <Typography>
                 <Button color="inherit" href="/login">Login</Button>

@@ -4,7 +4,10 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -20,8 +23,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Techpal
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -55,17 +58,17 @@ const useStyles = makeStyles((theme) => ({
 
 // -------- Initial Form Values -------- 
 const initialFormErrors = {
-  firstName: '',
-  lastName: '',
+  username: '',
   email: '',
-  password: ''
+  password: '',
+  type: ''
 }
 
 const initialFormValues = {
-  firstName: '',
-  lastName: '',
+  username: '',
   email: '',
-  password: ''
+  password: '',
+  type: ''
 }
 
 const initialDisabled = true;
@@ -136,10 +139,7 @@ export default function Registration() {
 
         {/* -------- Form Errors Render --------  */}
         <Typography className={classes.error} component="p">
-          {formErrors.firstName}
-        </Typography>
-        <Typography className={classes.error} component="p">
-          {formErrors.lastName}
+          {formErrors.username}
         </Typography>
         <Typography className={classes.error} component="p">
           {formErrors.email}
@@ -151,30 +151,16 @@ export default function Registration() {
 
         <form className={classes.form} onSubmit={registrationHandler} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} >
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                name="username"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="username"
+                label="Username"
                 autoFocus
-                value={formValues.firstName}
-                onInput={inputHandler}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                value={formValues.lastName}
+                value={formValues.username}
                 onInput={inputHandler}
               />
             </Grid>
@@ -206,10 +192,13 @@ export default function Registration() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Account Type</FormLabel>
+              <RadioGroup aria-label="type" name="type" value={formValues.type} onChange={inputHandler}>
+                <FormControlLabel value="owner" control={<Radio />} label="Owner" />
+                <FormControlLabel value="renter" control={<Radio />} label="Renter" />
+              </RadioGroup>
+            </FormControl>
             </Grid>
           </Grid>
           <Button
@@ -223,7 +212,7 @@ export default function Registration() {
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify="center">
             <Grid item>
               <Link href="/login" variant="body2">
                 Already have an account? Sign in

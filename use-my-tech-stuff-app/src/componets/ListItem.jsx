@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-;
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
      card: {
@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
      cardContent: {
        flexGrow: 1,
      },
+     cardActions: {
+       display: 'flex',
+       justifyContent: 'center',
+     }
    }));
 
 
@@ -31,6 +35,12 @@ const ListItem = props => {
      } = props
 
      const classes = useStyles();
+     const history = useHistory()
+
+     const viewDetails = e => {
+       e.preventDefault()
+       history.push(`/rentals/${listItem.id}`)
+     }
 
 
 return (
@@ -52,16 +62,11 @@ return (
                       Price/Day: ${listItem.price_per_day_in_dollars}
                     </Typography>
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      <span>
-                        View
+                  <CardActions className={classes.cardActions}>
+                    <Button size="small" color="primary" id={listItem.id} variant='contained' onClick={viewDetails}>
+                      <span id={listItem.id}>
+                        View Item Details
                       </span>
-                    </Button>
-                    <Button size="small" color="primary">
-                    <span>
-                      Edit
-                    </span>
                     </Button>
                   </CardActions>
                 </Card>

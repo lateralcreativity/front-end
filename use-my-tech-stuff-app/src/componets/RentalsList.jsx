@@ -75,11 +75,6 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
                     Main call to action
                   </Button>
                 </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
               </Grid>
             </div>
           </Container>
@@ -91,7 +86,7 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
           <Grid container spacing={4}>
 
             {listings.map((listItem) => (
-              <ListItem listItem={listItem} />
+              <ListItem listItem={listItem} key={listItem.id} />
             ))}
 
           </Grid>

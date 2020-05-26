@@ -207,7 +207,6 @@ export default function Registration() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            href="/"
             disabled={disabled}
           >
             Sign Up

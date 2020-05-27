@@ -21,7 +21,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="/">
-                Techpal
+                TechPal
         </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -99,7 +99,6 @@ const UserProfile = ({ fetchRentalsList }) => {
             </Typography>
             
             {listingsData.map(listing => {
-                console.log(listing)
                 return (
                <Container maxWidth='md' key={listing.id}>
                     <div className={classes.root}>

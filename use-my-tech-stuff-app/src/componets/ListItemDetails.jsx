@@ -43,6 +43,7 @@ function ListItemDetails(props) {
      const params = useParams()
      const { isFetching, singleItem, fetchSingleItem, deleteRentalItem } = props
      const classes = useStyles();
+     const history = useHistory()
 
 
      useEffect(() =>{
@@ -51,12 +52,14 @@ function ListItemDetails(props) {
      }, [])
 
           //capture 
-     const ownerId = localStorage.getItem('userId')
+     const ownerId = parseInt(localStorage.getItem('userId'))
      console.log(ownerId)
+     console.log(typeof(singleItem.owner_id))
 
      const deleteHandler = e => {
           e.preventDefault()
           deleteRentalItem(params.id)
+          history.push('/rentals')
      }
 
      return (

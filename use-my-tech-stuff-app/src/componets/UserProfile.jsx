@@ -9,7 +9,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import { sizing } from '@material-ui/system';
 
 function Copyright() {
     return (
@@ -28,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(15),
         display: 'flex',
-        flexDirection: 'column',
-        minHeight: '80vh'
+        flexDirection: 'column'
     },
     root: {
         minWidth: 275,

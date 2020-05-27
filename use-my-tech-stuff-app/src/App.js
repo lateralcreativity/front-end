@@ -10,6 +10,7 @@ import RentalsList from './componets/RentalsList'
 import HomePage from './componets/HomePage'
 import UserProfile from './componets/UserProfile'
 import ListItemDetails from './componets/ListItemDetails'
+import RentYourTech from './componets/RentYourTech';
 
 
 
@@ -37,6 +38,10 @@ function App() {
 
           <Route path='/profile'>
             <UserProfile />
+          </Route>
+
+          <Route path='/rentyourtech'>
+            <RentYourTech />
           </Route>
 
         </Switch>

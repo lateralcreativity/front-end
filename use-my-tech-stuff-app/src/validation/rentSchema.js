@@ -11,10 +11,7 @@ const rentSchema = yup.object().shape({
     .trim()
     .required('Exchange method is a required field.'),
     price_per_day_in_dollars: yup.string()
-    .required('Price per day in USD is a required field.'),
-    is_currently_available: yup.string().nullable(),
-    owner_id: yup.string().nullable(),
-    renter_id: yup.string().nullable()
+    .required('Price per day in USD is a required field.')
 })
 
 export default rentSchema;

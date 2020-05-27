@@ -12,6 +12,8 @@ export const FETCH_SINGLE_ITEM_START = 'FETCH_SINGLE_ITEM_START'
 export const FETCH_SINGLE_ITEM_SUCCESS = 'FETCH_SINGLE_ITEM_SUCCESS'
 export const FETCH_SINGLE_ITEM_FAILURE = 'FETCH_SINGLE_ITEM_FAILURE'
 
+export const POST_ITEM = 'POST_ITEM'
+
 
 export const fetchRentalsList = () => {
      return dispatch => {
@@ -59,4 +61,23 @@ export const fetchSingleItem = (id) => {
                     dispatch({ type: FETCH_SINGLE_ITEM_FAILURE, payload: err })
                })
      }
+}
+
+export const postItem = (itemFormValues, ownerId) => dispatch => {
+     itemFormValues.owner_id = parseInt(ownerId)
+     itemFormValues.is_currently_available = true
+     itemFormValues.price_per_day_in_dollars = parseFloat(itemFormValues.price_per_day_in_dollars)
+     console.log(itemFormValues)
+     return (
+          axiosWithAuth()
+               .post(`/api/listings`, itemFormValues)
+               .then(response => {
+                    console.log(response.data)
+                    const postItemAction = { type: POST_ITEM }
+                    dispatch(postItemAction)
+               })
+               .catch(err => {
+                    console.log(err)
+               })
+     )
 }

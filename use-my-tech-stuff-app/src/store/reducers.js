@@ -8,7 +8,8 @@ import {
      DELETE_RENTAL_ITEM_SUCCESS,
      FETCH_SINGLE_ITEM_START,
      FETCH_SINGLE_ITEM_SUCCESS,
-     FETCH_SINGLE_ITEM_FAILURE
+     FETCH_SINGLE_ITEM_FAILURE, 
+     POST_ITEM
 } from '../store/actions'
 
 
@@ -91,6 +92,10 @@ export const reducer = (state = initialState, action) => {
                     isFetching: false,
                     error: true,
                     errorMessage: action.payload
+               }
+          case POST_ITEM:
+               return {
+                    ...state,
                }
           default:
                return state

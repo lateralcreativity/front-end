@@ -98,6 +98,7 @@ export default function Registration() {
         console.log(response)
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userId', response.data.data.id)
+        localStorage.setItem('userType', response.data.data.type)
         history.push(`/`)
       })
       .catch(err => {

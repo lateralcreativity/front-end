@@ -18,6 +18,8 @@ export const SET_ISEDITING = 'SET_ISEDITING'
 
 export const PUT_ITEM = 'PUT_ITEM'
 
+export const RENT_ITEM = 'RENT_ITEM'
+
 
 export const fetchRentalsList = () => {
      return dispatch => {
@@ -107,5 +109,27 @@ export const putItem = (editedItemFormValues, urlId, editingOwnerId) => dispatch
                     dispatch(putItemAction)
                })
                .catch(err => console.log(err))
+     )
+}
+
+export const rentItem = (renterId, singleItem) => dispatch => {
+     const newItem = {
+          id: singleItem.id,
+          description: singleItem.description,
+          is_currently_available: false,
+          name: singleItem.name,
+          owner_id: singleItem.owner_id,
+          price_per_day_in_dollars: singleItem.price_per_day_in_dollars,
+          renter_id: renterId,
+          exchange_method: singleItem.exchange_method,
+     }
+
+     console.log(newItem)
+     return (
+          axiosWithAuth()
+               .put(`api/listings/${singleItem.id}`, newItem)
+               .then(response => {
+                    console.log(response)
+               })
      )
 }

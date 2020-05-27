@@ -13,7 +13,7 @@ import Container from '@material-ui/core/Container';
 import rentSchema from '../validation/rentSchema';
 import * as yup from 'yup';
 
-import { postItem } from '../store/actions'
+import { postItem, putItem } from '../store/actions'
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 
@@ -56,6 +56,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // -------- Initial Form Values -------- 
+let initialFormValues = {
+    name: '',
+    description: '',
+    exchange_method: '',
+    price_per_day_in_dollars: null,
+  }
 const initialFormErrors = {
   name:'',
   description:'',
@@ -63,22 +69,25 @@ const initialFormErrors = {
   price_per_day_in_dollars: '',
 }
 
-const initialFormValues = {
-  name: '',
-  description: '',
-  exchange_method: '',
-  price_per_day_in_dollars: null,
-}
 
 const initialDisabled = true;
 // -------- Initial Form Values End -------- 
 
 function RentYourTech(props) {
-  const { postItem } = props
+  const { postItem, singleItem, isEditing, putItem } = props
   const classes = useStyles();
   const ownerId = localStorage.getItem('userId')
   const history = useHistory()
   
+  if(isEditing){
+    initialFormValues = {
+    name: singleItem.name,
+    description: singleItem.description,
+    exchange_method: singleItem.exchange_method,
+    price_per_day_in_dollars: singleItem.price_per_day_in_dollars,
+  }
+}
+
   // -------- State -------- 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [formValues, setFormValues] = useState(initialFormValues)
@@ -86,10 +95,17 @@ function RentYourTech(props) {
   // -------- State Ends -------- 
 
   // -------- Handlers -------- 
-  function submitHandler(event) {
+  const submitHandler = (event) => {
     event.preventDefault();
     postItem(formValues, ownerId)
     history.push('/profile')
+    setFormValues(initialFormValues)
+  }
+
+  const editHandler = (e) => {
+    e.preventDefault();
+    putItem(formValues, singleItem.id, ownerId)
+    history.push(`/rentals/${singleItem.id}`)
     setFormValues(initialFormValues)
   }
 
@@ -154,7 +170,11 @@ function RentYourTech(props) {
         </Typography>
         {/* -------- Form Errors Render Ends --------  */}
 
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form 
+          className={classes.form} 
+          noValidate
+          onSubmit={isEditing ? editHandler : submitHandler} 
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} >
               <TextField
@@ -211,6 +231,7 @@ function RentYourTech(props) {
               />
             </Grid>
           </Grid>
+          
           <Button
             type="submit"
             fullWidth
@@ -219,7 +240,10 @@ function RentYourTech(props) {
             className={classes.submit}
             disabled={disabled}
           >
-            Submit
+            { isEditing ?
+            'Submit Edits' :
+            'Submit'
+            }
           </Button>
         </form>
       </div>
@@ -232,11 +256,12 @@ function RentYourTech(props) {
 
 const mapStateToProps = state => {
   return {
-    state
+    singleItem: state.singleItem,
+    isEditing: state.isEditing,
   }
 }
 
 export default connect(
-  null,
-  { postItem }
+  mapStateToProps,
+  { postItem, putItem }
 )(RentYourTech)

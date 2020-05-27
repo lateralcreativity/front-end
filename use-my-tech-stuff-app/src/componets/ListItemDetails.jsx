@@ -12,7 +12,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button'
 
 import NavBar from './NavBar'
-import { fetchSingleItem, deleteRentalItem } from '../store/actions'
+import { fetchSingleItem, deleteRentalItem, setIsEditing } from '../store/actions'
 import { connect } from 'react-redux'
 
 
@@ -41,8 +41,9 @@ const useStyles = makeStyles((theme) => ({
 
 function ListItemDetails(props) {
      const params = useParams()
-     const { isFetching, singleItem, fetchSingleItem, deleteRentalItem } = props
+     const { isFetching, singleItem, fetchSingleItem, deleteRentalItem, setIsEditing } = props
      const classes = useStyles();
+     const history = useHistory()
 
 
      useEffect(() =>{
@@ -51,12 +52,20 @@ function ListItemDetails(props) {
      }, [])
 
           //capture 
-     const ownerId = localStorage.getItem('userId')
+     const ownerId = parseInt(localStorage.getItem('userId'))
      console.log(ownerId)
+     console.log(typeof(singleItem.owner_id))
 
      const deleteHandler = e => {
           e.preventDefault()
           deleteRentalItem(params.id)
+          history.push('/rentals')
+     }
+
+     const goToEditing = e => {
+          e.preventDefault()
+          setIsEditing()
+          history.push('/rentyourtech')
      }
 
      return (
@@ -92,14 +101,30 @@ function ListItemDetails(props) {
                                         </Grid>
                                         {
                                              ownerId === singleItem.owner_id ?
+                                             <div>
                                         <Button
-                                             onClick={deleteHandler}
-                                             id='deleteButton'
+                                        
+                                        onClick={deleteHandler}
+                                        id='deleteButton'
                                         >
                                              <span id='deleteButton'>
                                                   Delete Item
                                              </span>
-                                        </Button> : null
+                                        </Button> 
+
+                                        <Button
+                                        onClick={goToEditing}
+                                        id='goToEditingButton'
+                                        >
+                                        <span id='goToEditingButton'>
+                                             Edit Item
+                                        </span>
+                                   </Button>
+                                        </div>
+                                        
+                                        
+                                        
+                                        : null
                                         }
                                    </Grid>
                               </Grid>
@@ -119,5 +144,5 @@ const mapStateToProps = state => {
 
 export default connect(
      mapStateToProps,
-     { fetchSingleItem, deleteRentalItem }
+     { fetchSingleItem, deleteRentalItem, setIsEditing }
 )(ListItemDetails)

@@ -14,6 +14,10 @@ export const FETCH_SINGLE_ITEM_FAILURE = 'FETCH_SINGLE_ITEM_FAILURE'
 
 export const POST_ITEM = 'POST_ITEM'
 
+export const SET_ISEDITING = 'SET_ISEDITING'
+
+export const PUT_ITEM = 'PUT_ITEM'
+
 
 export const fetchRentalsList = () => {
      return dispatch => {
@@ -79,5 +83,29 @@ export const postItem = (itemFormValues, ownerId) => dispatch => {
                .catch(err => {
                     console.log(err)
                })
+     )
+}
+
+export const setIsEditing = () => {
+     return dispatch => {
+          dispatch({ type: SET_ISEDITING })
+     }
+}
+
+export const putItem = (editedItemFormValues, urlId, editingOwnerId) => dispatch => {
+     editedItemFormValues.owner_id = parseInt(editingOwnerId)
+     editedItemFormValues.is_currently_available = true
+     editedItemFormValues.price_per_day_in_dollars = parseFloat(editedItemFormValues.price_per_day_in_dollars)
+     console.log(editedItemFormValues)
+
+     return (
+          axiosWithAuth()
+               .put(`/api/listings/${urlId}`, editedItemFormValues)
+               .then(response => {
+                    console.log(response.data)
+                    const putItemAction = { type: PUT_ITEM }
+                    dispatch(putItemAction)
+               })
+               .catch(err => console.log(err))
      )
 }

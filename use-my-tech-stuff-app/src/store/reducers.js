@@ -9,7 +9,9 @@ import {
      FETCH_SINGLE_ITEM_START,
      FETCH_SINGLE_ITEM_SUCCESS,
      FETCH_SINGLE_ITEM_FAILURE, 
-     POST_ITEM
+     POST_ITEM,
+     SET_ISEDITING,
+     PUT_ITEM,
 } from '../store/actions'
 
 
@@ -21,6 +23,7 @@ const initialState = {
      errorMessage: '',
      deleteMessage: '',
      singleItem: {},
+     isEditing: false,
 }
 
 export const reducer = (state = initialState, action) => {
@@ -96,6 +99,16 @@ export const reducer = (state = initialState, action) => {
           case POST_ITEM:
                return {
                     ...state,
+               }
+          case SET_ISEDITING:
+               return {
+                    ...state,
+                    isEditing: true,
+               }
+          case PUT_ITEM:
+               return{
+                    ...state,
+                    isEditing: false,
                }
           default:
                return state

@@ -130,6 +130,11 @@ export const rentItem = (renterId, singleItem) => dispatch => {
                .put(`api/listings/${singleItem.id}`, newItem)
                .then(response => {
                     console.log(response)
+                    const rentItemAction = { type: RENT_ITEM }
+                    dispatch(rentItemAction)
+               })
+               .catch(err => {
+                    console.log(err)
                })
      )
 }

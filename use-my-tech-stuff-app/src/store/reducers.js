@@ -12,6 +12,7 @@ import {
      POST_ITEM,
      SET_ISEDITING,
      PUT_ITEM,
+     RENT_ITEM
 } from '../store/actions'
 
 
@@ -109,6 +110,10 @@ export const reducer = (state = initialState, action) => {
                return{
                     ...state,
                     isEditing: false,
+               }
+          case RENT_ITEM:
+               return {
+                    ...state
                }
           default:
                return state

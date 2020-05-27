@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +34,20 @@ const useStyles = makeStyles((theme) => ({
    }));
 
    const NavBar = () => {
-     const classes = useStyles();
+    const classes = useStyles();
+    const userId = localStorage.getItem('userId')
+
+    useEffect(() => {
+      console.log(userId)
+    }, [userId])
+
+    const logoutHandler = () => {
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      localStorage.removeItem('userType')
+    }
+
+
 
 
         return (
@@ -48,7 +62,9 @@ const useStyles = makeStyles((theme) => ({
                 </Link>
               </Typography>
               <Typography>
-                <Button color="inherit" href="/login">Login</Button>
+                { 
+                userId ? <Button color="inherit" onClick={logoutHandler} href='/login'>Logout</Button> : <Button color="inherit" href="/login">Login</Button>
+                }
                 <Button color="inherit" href="/register">Register</Button>
               </Typography>
             </Toolbar>

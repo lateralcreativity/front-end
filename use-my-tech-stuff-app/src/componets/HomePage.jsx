@@ -79,7 +79,6 @@ const HomePage = () => {
      return (
           <React.Fragment>
                <CssBaseline />
-               <NavBar />
                <main>
                     {/* Hero unit */}
                     <div className={classes.heroContent}>

@@ -31,7 +31,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(15)
     },
     listingContainer: {
         padding: theme.spacing(2),
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     },
     root: {
         flexGrow: 1,
-        margin: '20%',
+        margin: '5%',
     },
     title: {
         fontSize: 14,
@@ -57,13 +57,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
-},
+}
 }));
 
 const UserProfile = ({ fetchRentalsList }) => {
     const classes = useStyles();
     const params = useParams()
-    const [userData,setUserData] = useState([])
+    const [userData, setUserData] = useState({})
+    const [listingsData, setListingsData] = useState([])
 
     useEffect(() =>{
         const userId = localStorage.getItem(`userId`)
@@ -71,7 +72,8 @@ const UserProfile = ({ fetchRentalsList }) => {
         .get(`https://techpal.herokuapp.com/api/users/${userId}`)
         .then(resolve => {
             // console.log(resolve.data)
-            setUserData(resolve.data.listings)
+            setUserData(resolve.data.user)
+            setListingsData(resolve.data.listings)
         })
         .catch(error => {
             console.log(error, 'Error')
@@ -92,8 +94,11 @@ const UserProfile = ({ fetchRentalsList }) => {
             <div className={classes.paper}>
             <Typography component="p">
                 {userData.username}
+                <br/>
+                My Listings
             </Typography>
-            {userData.map(listing => {
+            
+            {listingsData.map(listing => {
                 console.log(listing)
                 return (
                <Container maxWidth='md' key={listing.id}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
@@ -9,7 +9,10 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import { fetchRentalsList } from '../store/actions'
+import { connect } from 'react-redux'
 
+ 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -47,8 +50,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function UserProfile() {
+const UserProfile = ({ fetchRentalsList }) => {
     const classes = useStyles();
+
+    useEffect(() =>{
+        fetchRentalsList()
+    })
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -113,3 +120,9 @@ export default function UserProfile() {
         </Container>
     );
 }
+
+
+export default connect(
+    null,
+    { fetchRentalsList }
+)(UserProfile)

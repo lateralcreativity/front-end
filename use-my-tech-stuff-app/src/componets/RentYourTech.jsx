@@ -13,6 +13,10 @@ import Container from '@material-ui/core/Container';
 import rentSchema from '../validation/rentSchema';
 import * as yup from 'yup';
 
+import { postItem } from '../store/actions'
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+
 
 function Copyright() {
   return (
@@ -57,9 +61,6 @@ const initialFormErrors = {
   description:'',
   exchange_method:'',
   price_per_day_in_dollars: '',
-  is_currently_available: '',
-  owner_id: '',
-  renter_id: ''
 }
 
 const initialFormValues = {
@@ -67,16 +68,16 @@ const initialFormValues = {
   description: '',
   exchange_method: '',
   price_per_day_in_dollars: null,
-  is_currently_available: false,
-  owner_id: null,
-  renter_id: null
 }
 
 const initialDisabled = true;
 // -------- Initial Form Values End -------- 
 
-export default function RentYourTech() {
+function RentYourTech(props) {
+  const { postItem } = props
   const classes = useStyles();
+  const ownerId = localStorage.getItem('userId')
+  const history = useHistory()
   
   // -------- State -------- 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
@@ -87,6 +88,8 @@ export default function RentYourTech() {
   // -------- Handlers -------- 
   function submitHandler(event) {
     event.preventDefault();
+    postItem(formValues, ownerId)
+    history.push('/profile')
     setFormValues(initialFormValues)
   }
 
@@ -125,6 +128,8 @@ export default function RentYourTech() {
       })
   }, [formValues])
   // ---------------------------------------- 
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -201,7 +206,7 @@ export default function RentYourTech() {
                 label="Price Per Day in $"
                 id="price_per_day_in_dollars"
                 type="number"
-                value={formValues.price_per_day_in_dollars <= 0 ? 0 : parseInt(formValues.price_per_day_in_dollars)}
+                value={formValues.price_per_day_in_dollars}
                 onInput={inputHandler}
               />
             </Grid>
@@ -224,3 +229,14 @@ export default function RentYourTech() {
     </Container>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    state
+  }
+}
+
+export default connect(
+  null,
+  { postItem }
+)(RentYourTech)

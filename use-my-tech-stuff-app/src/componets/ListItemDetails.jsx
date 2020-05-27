@@ -71,7 +71,6 @@ function ListItemDetails(props) {
      return (
           <React.Fragment>
                <CssBaseline />
-               <NavBar />
                <Container maxWidth='md'>
                     <div className={classes.root}>
                          <Paper className={classes.paper}>

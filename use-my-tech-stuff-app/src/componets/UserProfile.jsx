@@ -103,8 +103,7 @@ const UserProfile = ({ fetchRentalsList }) => {
             
             <div className={classes.paper}>
             <Typography component="p">
-                My Listings
-                <br/>
+                Username:
                 <br/>
                 {userData.username}
             </Typography>

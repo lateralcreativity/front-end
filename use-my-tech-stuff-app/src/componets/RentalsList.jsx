@@ -58,7 +58,7 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
 
   function inputHandler( event ) {
     setSearchFormValues(event.target.value)
-    // console.log(searchFormValues)
+    console.log(searchFormValues)
   }
 
   useEffect(() => {

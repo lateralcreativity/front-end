@@ -15,6 +15,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import backgroundImage from '../images/technology-hero-image.jpg';
@@ -27,7 +28,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="https://github.com/bw-use-my-tech-stuff-one/front-end/blob/master/LICENSE" target="_blank">
         TechPal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -237,7 +238,17 @@ export default function Login() {
             {isLoggingIn && <CircularProgress />}
             
             <Box mt={5}>
-              <Copyright />
+              {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+              Visit our project repo below.
+        </Typography>
+        <Link href="https://github.com/bw-use-my-tech-stuff-one" target="_blank" style={{textDecoration: 'none', color: 'inherit'}}>
+              <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
+        </Link>
+        <Copyright />
+      </footer>
+      {/* End footer */}
             </Box>
           </form>
         </div>

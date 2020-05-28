@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import PlusOneOutlinedIcon from '@material-ui/icons/PlusOneOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import Container from '@material-ui/core/Container';
 import rentSchema from '../validation/rentSchema';
 import * as yup from 'yup';
@@ -22,7 +23,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="https://github.com/bw-use-my-tech-stuff-one/front-end/blob/master/LICENSE" target="_blank">
         TechPal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -248,7 +249,17 @@ function RentYourTech(props) {
         </form>
       </div>
       <Box mt={2}>
+      {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+              Visit our project repo below.
+        </Typography>
+        <Link href="https://github.com/bw-use-my-tech-stuff-one" target="_blank" style={{textDecoration: 'none', color: 'inherit'}}>
+              <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
+        </Link>
         <Copyright />
+      </footer>
+      {/* End footer */}
       </Box>
     </Container>
   );

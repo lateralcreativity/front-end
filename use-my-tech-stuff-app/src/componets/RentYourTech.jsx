@@ -61,7 +61,7 @@ let initialFormValues = {
     name: '',
     description: '',
     exchange_method: '',
-    price_per_day_in_dollars: null,
+    price_per_day_in_dollars: 0,
   }
 const initialFormErrors = {
   name:'',
@@ -227,6 +227,11 @@ function RentYourTech(props) {
                 label="Price Per Day in $"
                 id="price_per_day_in_dollars"
                 type="number"
+                InputProps={{
+                  inputProps: { 
+                    min: 0 
+                  }
+                }}
                 value={formValues.price_per_day_in_dollars}
                 onInput={inputHandler}
               />

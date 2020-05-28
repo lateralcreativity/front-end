@@ -50,7 +50,7 @@ const HomePage = () => {
                height: '100%',
                display: 'flex',
                margin: '2%',
-               alignItems: 'center',
+               alignItems: 'center'
           },
           cardMedia: {
                maxWidth: '300px',
@@ -63,7 +63,7 @@ const HomePage = () => {
           homePageItem: {
                display: 'flex',
                flexDirection: 'column',
-               margin: '5%',
+               margin: '0 auto'
           }
      }));
 
@@ -149,7 +149,7 @@ const HomePage = () => {
                               <div className={classes.homePageItem}>
                               <div>
                                    <h3>
-                                        Do you have tech gear that you'd like to rent out? Add an item for rent here.
+                                        Do you have tech gear that you'd like to rent out?<br/> Add an item for rent here.
                                    </h3>
                               </div>
                               <div onClick={buttonLinkHandler}>
@@ -180,7 +180,7 @@ const HomePage = () => {
                               <div className={classes.homePageItem}>
                               <div>
                                    <h3>
-                                        See tech items currently available to rent
+                                        See tech items currently available to rent.
                                    </h3>
                               </div>
                               <div onClick={buttonLinkHandler}>

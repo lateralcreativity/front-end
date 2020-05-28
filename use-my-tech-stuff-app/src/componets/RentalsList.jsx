@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField';
 
 import ListItem from './ListItem'
 
@@ -47,11 +48,18 @@ const useStyles = makeStyles((theme) => ({
   },
   topSection: {
     marginTop: '5%',
-  },
+  }
 }));
 
 function RentalsList({ listings, isFetching, fetchRentalsList }) {
   const classes = useStyles();
+  const [searchFormValues, setSearchFormValues] = useState('')
+  let filteredArr = listings.filter(item => item.name.toLowerCase().includes(searchFormValues))
+
+  function inputHandler( event ) {
+    setSearchFormValues(event.target.value)
+    // console.log(searchFormValues)
+  }
 
   useEffect(() => {
     fetchRentalsList()
@@ -70,6 +78,13 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               See tech products currently available to rent. View item details to add the item to your rentals list.
             </Typography>
+            <TextField 
+              id="filled-basic" 
+              label="Search" 
+              variant="filled"
+              fullWidth
+              onChange={inputHandler}
+            />
           </Container>
         </div>
           {/* End hero unit */}
@@ -78,9 +93,15 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
 
-            {listings.map((listItem) => (
+            { searchFormValues === '' ?
+              listings.map((listItem) => (
               <ListItem listItem={listItem} key={listItem.id} />
-            ))}
+            ))
+            :
+              filteredArr.map(listItem => (
+                <ListItem listItem={listItem} key={listItem.id} />
+              ))
+            }
 
           </Grid>
         </Container>

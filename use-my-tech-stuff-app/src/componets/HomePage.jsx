@@ -10,7 +10,7 @@ import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia';
 import profilePlaceholderImage from '../images/profile-pic-placeholder.png';
-
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 import NavBar from './NavBar'
 import ListItem from './ListItem'
@@ -19,7 +19,7 @@ function Copyright() {
      return (
           <Typography variant="body2" color="textSecondary" align="center">
                {'Copyright © '}
-               <Link color="inherit" href="/">
+               <Link color="inherit" href="https://github.com/bw-use-my-tech-stuff-one/front-end/blob/master/LICENSE" target="_blank">
                     TechPal
       </Link>{' '}
                {new Date().getFullYear()}
@@ -109,11 +109,11 @@ const HomePage = () => {
                                    variant='contained'
                                    color='secondary'
                                    onClick={buttonLinkHandler}
-                                   id='profile'
+                                   id='myprofile'
                                    size='large'
                                    text='Profile'
                               >
-                                   <span id='profile'>
+                                   <span id='myprofile'>
                                         Profile
                                    </span>
                               </Button>
@@ -155,11 +155,11 @@ const HomePage = () => {
                {/* Footer */}
                <footer className={classes.footer}>
                     <Typography variant="h6" align="center" gutterBottom>
-                         Footer
-        </Typography>
-                    <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                         Something here to give the footer a purpose!
-        </Typography>
+                         Visit our project repo below.
+                    </Typography>
+                    <Link href="https://github.com/bw-use-my-tech-stuff-one" target="_blank" style={{textDecoration: 'none', color: 'inherit'}}>
+                         <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
+                    </Link>
                     <Copyright />
                </footer>
                {/* End footer */}

@@ -34,7 +34,11 @@ function App() {
             <Registration />
           </Route>
 
-          <Route path='/profile'>
+          <Route path='/profile/:id'>
+            <UserProfile />
+          </Route>
+
+          <Route path='/myprofile/'>
             <UserProfile />
           </Route>
 

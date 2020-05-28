@@ -12,7 +12,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +25,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="/">
+      <Link color="inherit" href="https://github.com/bw-use-my-tech-stuff-one/front-end/blob/master/LICENSE" target="_blank">
         TechPal
       </Link>{' '}
       {new Date().getFullYear()}
@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
   error: {
     color: 'red',
     fontWeight: 'bold'
+  },
+  footer: {
+    padding: theme.spacing(2)
   }
 }));
 
@@ -148,7 +151,7 @@ export default function Registration() {
   // ---------------------------------------- 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -241,9 +244,17 @@ export default function Registration() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
+      {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+              Visit our project repo below.
+        </Typography>
+        <Link href="https://github.com/bw-use-my-tech-stuff-one" target="_blank" style={{textDecoration: 'none', color: 'inherit'}}>
+              <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
+        </Link>
         <Copyright />
-      </Box>
+      </footer>
+      {/* End footer */}
     </Container>
   );
 }

@@ -9,18 +9,19 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { fetchRentalsList } from '../store/actions'
 import { connect } from 'react-redux'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { deleteRentalItem } from '../store/actions'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 
  
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="/">
+            <Link color="inherit" href="https://github.com/bw-use-my-tech-stuff-one/front-end/blob/master/LICENSE" target="_blank">
                 TechPal
         </Link>{' '}
             {new Date().getFullYear()}
@@ -47,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         minWidth: '100%',
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: 0
     },
     image: {
         width: 128,
@@ -57,21 +63,26 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     maxWidth: '100%',
     maxHeight: '100%',
-}
+    },
+    footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(6)
+    }
 }));
 
 const UserProfile = ({ fetchRentalsList }) => {
     const classes = useStyles();
     const params = useParams()
+    const location = useLocation()
     const [userData, setUserData] = useState({})
     const [listingsData, setListingsData] = useState([])
 
     useEffect(() =>{
-        const userId = localStorage.getItem(`userId`)
+        const userToGet = location.pathname.includes('myprofile') ? localStorage.getItem(`userId`) : params.id
         axiosWithAuth()
-        .get(`https://techpal.herokuapp.com/api/users/${userId}`)
+        .get(`https://techpal.herokuapp.com/api/users/${userToGet}`)
         .then(resolve => {
-            // console.log(resolve.data)
+            console.log(resolve.data)
             setUserData(resolve.data.user)
             setListingsData(resolve.data.listings)
         })
@@ -84,7 +95,6 @@ const UserProfile = ({ fetchRentalsList }) => {
 
     const deleteHandler = e => {
         e.preventDefault()
-        deleteRentalItem(params.id)
    }
 
     return (
@@ -94,6 +104,8 @@ const UserProfile = ({ fetchRentalsList }) => {
             <div className={classes.paper}>
             <Typography component="p">
                 {userData.username}
+                <br/>
+                {userData.email}
                 <br/>
                 My Listings
             </Typography>
@@ -122,7 +134,6 @@ const UserProfile = ({ fetchRentalsList }) => {
                                                        {listing.exchange_method}
                                                   </Typography>
                                              </Grid>
-                                             
                                         </Grid>
                                         <Grid item>
                                              <Typography variant="subtitle1">${listing.price_per_day_in_dollars}/day</Typography>
@@ -147,9 +158,15 @@ const UserProfile = ({ fetchRentalsList }) => {
             })}
             </div>
 
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+            <footer className={classes.footer}>
+                    <Typography variant="h6" align="center" gutterBottom>
+                         Visit our project repo below.
+                    </Typography>
+                    <Link href="https://github.com/bw-use-my-tech-stuff-one" style={{textDecoration: 'none', color: 'inherit'}}>
+                         <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
+                    </Link>
+                    <Copyright />
+            </footer>
         </Container>
     );
 }

@@ -82,7 +82,7 @@ const UserProfile = ({ fetchRentalsList }) => {
         axiosWithAuth()
         .get(`https://techpal.herokuapp.com/api/users/${userToGet}`)
         .then(resolve => {
-            console.log(resolve.data)
+            // console.log(resolve.data)
             setUserData(resolve.data.user)
             setListingsData(resolve.data.listings)
         })
@@ -103,11 +103,22 @@ const UserProfile = ({ fetchRentalsList }) => {
             
             <div className={classes.paper}>
             <Typography component="p">
+                My Listings
+                <br/>
+                <br/>
                 {userData.username}
+            </Typography>
+            <br/>
+            <Typography component="p">
+                Account Type:
+                <br/>
+                {userData.type}
+            </Typography>
+            <br/>
+            <Typography component="p">
+                Contact:
                 <br/>
                 {userData.email}
-                <br/>
-                My Listings
             </Typography>
             
             {listingsData.map(listing => {

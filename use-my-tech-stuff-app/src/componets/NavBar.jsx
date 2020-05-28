@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
                 <Button 
                   // variant='contained'
                   color='inherit'
-                  href='/profile'
+                  href='/myprofile'
                 >
                   My Profile
                 </Button>

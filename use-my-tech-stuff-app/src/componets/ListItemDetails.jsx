@@ -81,6 +81,8 @@ function ListItemDetails(props) {
      const rentItemHandler = e => {
           e.preventDefault()
           rentItem(userId, singleItem)
+          history.push(`/`)
+          alert('Item Rented!')
      }
 
      return (

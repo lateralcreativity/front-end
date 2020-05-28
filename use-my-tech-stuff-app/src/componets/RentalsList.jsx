@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 function RentalsList({ listings, isFetching, fetchRentalsList }) {
   const classes = useStyles();
   const [searchFormValues, setSearchFormValues] = useState('')
-  let filteredArr = listings.filter(item => item.name.toLowerCase().includes(searchFormValues))
+  let filteredArr = listings.filter(item => item.name.toLowerCase().includes(searchFormValues.toLowerCase()))
 
   function inputHandler( event ) {
     setSearchFormValues(event.target.value)

@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { fetchRentalsList } from '../store/actions'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteRentalItem } from '../store/actions'
 
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         minHeight: '100vh',
         flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'space-between',
         padding: 0
     },
@@ -67,7 +68,30 @@ const useStyles = makeStyles((theme) => ({
     },
     footer: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(6)
+        padding: theme.spacing(6),
+        width: '100%,'
+    },
+    itemContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '2%',
+    },
+    button: {
+        margin: '5%',
+        height: '50px',
+    },
+    itemDetails: {
+        boxShadow: '0 1px 2px 1px rgba(0,0,0,.25)',
+       border: '1px',
+       borderRadius: '5px',
+    },
+    userDetailsContainer: {
+        boxShadow: '0 1px 2px 1px rgba(0,0,0,.25)',
+        border: '1px',
+        borderRadius: '5px',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        margin: '3%',
     }
 }));
 
@@ -75,6 +99,7 @@ const UserProfile = ({ fetchRentalsList, deleteRentalItem }) => {
     const classes = useStyles();
     const params = useParams()
     const location = useLocation()
+    const history = useHistory()
     const [userData, setUserData] = useState({})
     const [listingsData, setListingsData] = useState([])
 
@@ -106,66 +131,68 @@ const UserProfile = ({ fetchRentalsList, deleteRentalItem }) => {
             <CssBaseline />
             
             <div className={classes.paper}>
-            <Typography component="p">
-                Username:
-                <br/>
-                {userData.username}
-            </Typography>
-            <br/>
-            <Typography component="p">
-                Account Type:
-                <br/>
-                {userData.type}
-            </Typography>
-            <br/>
-            <Typography component="p">
-                Contact:
-                <br/>
-                {userData.email}
-            </Typography>
+                <h2>Profile</h2>
+                <div className={classes.userDetailsContainer}>
+                    <Typography component="p">
+                        <h4>Username:</h4>
+                        <h5>{`${userData.username}`.toUpperCase()}</h5>
+                    </Typography>
+                    <Typography component="p">
+                        <h4>Account Type:</h4>
+                        <h5>{`${userData.type}`.toUpperCase()}</h5>
+                    </Typography>
+                    <Typography component="p">
+                        <h4>Contact:</h4>
+                        <h5>{`${userData.email}`.toUpperCase()}</h5>
+                    </Typography>
+                </div>
             
             {listingsData.map(listing => {
                 return (
-               <Container maxWidth='md' key={listing.id}>
+               <Container maxWidth='xl' key={listing.id} className={classes.item}>
                     <div className={classes.root}>
                          <Paper className={classes.listingContainer}>
                               <Grid container spacing={2}>
-                                   <Grid item>
+                                   {/* <Grid item>
                                         <ButtonBase className={classes.image}>
                                              <img className={classes.img} alt="complex" src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
                                         </ButtonBase>
-                                   </Grid>
-                                   <Grid item xs={12} sm container>
-                                        <Grid item xs container direction="column" spacing={2}>
-                                             <Grid item xs>
-                                                  <Typography gutterBottom variant="subtitle1">
-                                                      {listing.name}
-                                                  </Typography>
-                                                  <Typography variant="body2" gutterBottom>
-                                                       {listing.description}
-                                                  </Typography>
-                                                  <Typography variant="body2" color="textSecondary">
-                                                       {listing.exchange_method}
-                                                  </Typography>
-                                             </Grid>
-                                        </Grid>
-                                        <Grid item>
+                                   </Grid> */}
+                                   <Grid item xs={12} lg container>
+                                            <Grid item xs container direction="column" spacing={2}>
+                                                <Grid item xs className={classes.itemDetails}>
+                                                    <Typography gutterBottom variant="h6">
+                                                        {listing.name}
+                                                    </Typography>
+                                                    <Typography variant="body2" gutterBottom>
+                                                        {listing.description}
+                                                    </Typography>
+                                                    <Typography variant="body2" color="textSecondary">
+                                                        {listing.exchange_method}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                        <Grid item className={classes.button}>
                                              <Typography variant="subtitle1">${listing.price_per_day_in_dollars}/day</Typography>
                                         </Grid>
                                         {
                                              ownerId == listing.owner_id ?
-                                        <Button
+                                             <Button
+                                            className={classes.button}
+                                            variant='contained'
+                                            color='secondary'
                                              onClick={e => {
                                                 e.preventDefault() 
                                                 deleteRentalItem(listing.id)
-                                                
+                                                history.push('/')
                                              }}
                                              id='deleteButton'
                                         >
                                              <span id='deleteButton'>
                                                   Delete Item
                                              </span>
-                                        </Button> : null
+                                        </Button>                                        
+                                        : null
                                         }
                                    </Grid>
                               </Grid>

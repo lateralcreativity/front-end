@@ -127,19 +127,20 @@ const HomePage = () => {
                                    </h3>
                               </div>
                                    }
-                              <Button
-                                   type='submit'
-                                   variant='contained'
-                                   color='secondary'
-                                   onClick={buttonLinkHandler}
-                                   id='myprofile'
-                                   size='large'
-                                   text='Profile'
-                                   >
-                                   <span id='myprofile'>
-                                        Profile
-                                   </span>
-                              </Button>
+                              <div onClick={buttonLinkHandler}>
+                                   <Button
+                                        type='submit'
+                                        variant='contained'
+                                        color='secondary'
+                                        id='myprofile'
+                                        size='large'
+                                        text='Profile'
+                                        >
+                                        <span id='myprofile'>
+                                             Profile
+                                        </span>
+                                   </Button>
+                              </div>
                                    </div>
                          </Card>
                          { userType === 'owner' ?
@@ -155,20 +156,24 @@ const HomePage = () => {
                                         Do you have tech gear that you'd like to rent out? Add an item for rent here.
                                    </h3>
                               </div>
+                              <div onClick={buttonLinkHandler}>
                               <Button
                                    variant='contained'
                                    color='secondary'
-                                   onClick={buttonLinkHandler}
                                    id='rentyourtech'
                                    size='large'
-                                   ><span id='rentyourtech'>
-                              Rent Your Tech
-          </span></Button>
+                                   ><span 
+                                   id='rentyourtech'
+                                   onClick={buttonLinkHandler}
+                                   >
+                                        Rent Your Tech
+                                   </span>
+                              </Button>
+                              </div>
                          </div>
                          </Card>
                          : null
                          }
-                    { userType === 'renter' ?
                          <Card className={classes.card}>
                               <img
                                    className={classes.cardMedia}
@@ -181,6 +186,7 @@ const HomePage = () => {
                                         See tech items currently available to rent
                                    </h3>
                               </div>
+                              <div onClick={buttonLinkHandler}>
                               <Button
                                    size='large'
                                    variant='contained'
@@ -192,10 +198,10 @@ const HomePage = () => {
                                              Rentals List
                                         </span>
                                    </Button>
+                                   </div>
                               </div>
                          </Card>
-                         : null
-                    }
+
                     </Container>
                </main>
                {/* Footer */}

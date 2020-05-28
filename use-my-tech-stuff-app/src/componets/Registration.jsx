@@ -98,7 +98,6 @@ export default function Registration() {
       .create({ headers: {'Content-Type': 'application/json'} })
       .post(`${techPalURL}/api/auth/register`, formValues)
       .then(response => {
-        console.log(response)
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('userId', response.data.data.id)
         localStorage.setItem('userType', response.data.data.type)
@@ -110,10 +109,6 @@ export default function Registration() {
       })
     setFormValues(initialFormValues)
   }
-
-  useEffect(() => {
-    console.log(formValues)
-  },[formValues])
 
   function inputHandler(event) {
     const name = event.target.name;

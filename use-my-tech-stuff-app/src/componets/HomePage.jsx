@@ -2,18 +2,12 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia';
-import profilePlaceholderImage from '../images/profile-pic-placeholder.png';
 import GitHubIcon from '@material-ui/icons/GitHub';
-
-import NavBar from './NavBar'
-import ListItem from './ListItem'
 
 function Copyright() {
      return (
@@ -111,6 +105,7 @@ const HomePage = () => {
                                    className={classes.cardMedia}
                                    src='https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png'
                                    title="Profile Pic Placeholder"
+                                   alt="placeholder pfp"
                               />
                               <div className={classes.homePageItem}>
 
@@ -149,6 +144,7 @@ const HomePage = () => {
                                    className={classes.cardMedia}
                                    src='https://images.unsplash.com/photo-1577375774296-1480089cb555?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80'
                                    title="Profile Pic Placeholder"
+                                   alt="placeholder pfp"
                               />
                               <div className={classes.homePageItem}>
                               <div>
@@ -179,6 +175,7 @@ const HomePage = () => {
                                    className={classes.cardMedia}
                                    src='https://images.unsplash.com/photo-1546624156-249875babb27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80'
                                    title='computer desk setup'
+                                   alt="computer on a desk"
                                    />
                               <div className={classes.homePageItem}>
                               <div>

@@ -14,9 +14,15 @@ const useStyles = makeStyles((theme) => ({
        height: '100%',
        display: 'flex',
        flexDirection: 'column',
+       alignItems: 'center',
+       justifyContent: 'center'
      },
      cardMedia: {
        paddingTop: '56.25%', // 16:9
+       boxShadow: '0 4px 12px 0px rgba(0,0,0,.25)',
+       width: '98%',
+       border: '1px',
+       borderRadius: '5px',
      },
      cardContent: {
        flexGrow: 1,
@@ -24,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
      cardActions: {
        display: 'flex',
        justifyContent: 'center',
+       marginBottom: '2%',
      }
    }));
 
@@ -52,10 +59,10 @@ return (
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h4" component="h2">
                       {listItem.name}
                     </Typography>
-                    <Typography>
+                    <Typography gutterBottom variant='h6'>
                       {listItem.description}
                     </Typography>
                     <Typography>
@@ -63,7 +70,7 @@ return (
                     </Typography>
                   </CardContent>
                   <CardActions className={classes.cardActions}>
-                    <Button size="small" color="primary" id={listItem.id} variant='contained' onClick={viewDetails}>
+                    <Button size="large" color="secondary" id={listItem.id} variant='contained' onClick={viewDetails}>
                       <span id={listItem.id}>
                         View Item Details
                       </span>

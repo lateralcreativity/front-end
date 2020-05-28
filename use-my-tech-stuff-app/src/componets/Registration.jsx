@@ -103,6 +103,7 @@ export default function Registration() {
         localStorage.setItem('userId', response.data.data.id)
         localStorage.setItem('userType', response.data.data.type)
         history.push(`/`)
+        window.location.reload()
       })
       .catch(err => {
         console.log(err)

@@ -23,8 +23,11 @@ function App() {
       <Router>
         <Switch>
           <PrivateRoute exact path='/rentals' component={RentalsList} />
-          <Route exact path='/' component={HomePage} />
+          <PrivateRoute exact path='/' component={HomePage} />
           <PrivateRoute exact path='/rentals/:id' component={ListItemDetails}/>
+          <PrivateRoute exact path='/profile/:id' component={UserProfile}/>
+          <PrivateRoute path='/myprofile/' component={UserProfile}/>
+          <PrivateRoute path='/rentyourtech' component={RentYourTech}/>           
 
           <Route path='/login'>
             <Login />
@@ -34,17 +37,8 @@ function App() {
             <Registration />
           </Route>
 
-          <Route path='/profile/:id'>
-            <UserProfile />
-          </Route>
 
-          <Route path='/myprofile/'>
-            <UserProfile />
-          </Route>
 
-          <Route path='/rentyourtech'>
-            <RentYourTech />
-          </Route>
 
         </Switch>
       </Router>

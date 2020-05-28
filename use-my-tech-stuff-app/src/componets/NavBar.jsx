@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { setIsEditing } from '../store/actions';
 
 
+
 const useStyles = makeStyles((theme) => ({
      icon: {
        marginRight: theme.spacing(0.5),
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
      const userId = localStorage.getItem('userId')
 
 
+     
     const logoutHandler = () => {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')

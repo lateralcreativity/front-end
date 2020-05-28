@@ -172,7 +172,7 @@ const UserProfile = ({ fetchRentalsList }) => {
                     <Typography variant="h6" align="center" gutterBottom>
                          Visit our project repo below.
                     </Typography>
-                    <Link href="https://github.com/bw-use-my-tech-stuff-one" style={{textDecoration: 'none', color: 'inherit'}}>
+                    <Link href="https://github.com/bw-use-my-tech-stuff-one" target="_blank" style={{textDecoration: 'none', color: 'inherit'}}>
                          <GitHubIcon style={{fontSize: '45px'}}></GitHubIcon>
                     </Link>
                     <Copyright />

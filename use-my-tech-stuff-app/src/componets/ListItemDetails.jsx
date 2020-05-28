@@ -36,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
           maxWidth: '100%',
           maxHeight: '100%',
      },
+     button: {
+          margin: '2%',
+     },
+     detailsContainer: {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+     },
 }));
 
 
@@ -87,7 +95,7 @@ function ListItemDetails(props) {
                                              <img className={classes.img} alt="complex" src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
                                         </ButtonBase>
                                    </Grid>
-                                   <Grid item xs={12} sm container>
+                                   <Grid item xs={12} sm container className={classes.detailsContainer}>
                                         <Grid item xs container direction="column" spacing={2}>
                                              <Grid item xs>
                                                   <Typography gutterBottom variant="subtitle1">
@@ -109,7 +117,9 @@ function ListItemDetails(props) {
                                              userId === singleItem.owner_id ?
                                              <div>
                                         <Button
-                                        
+                                        className={classes.button}
+                                        variant='contained'
+                                        color='secondary'
                                         onClick={deleteHandler}
                                         id='deleteButton'
                                         >
@@ -119,8 +129,11 @@ function ListItemDetails(props) {
                                         </Button> 
 
                                         <Button
+                                        className={classes.button}
                                         onClick={goToEditing}
                                         id='goToEditingButton'
+                                        variant='contained'
+                                        color='primary'
                                         >
                                         <span id='goToEditingButton'>
                                              Edit Item
@@ -133,8 +146,9 @@ function ListItemDetails(props) {
                                         : null
                                         }
                                         {//check for if the user is a renter or owner
-                                             userType === 'renter' ? <div>
+                                             userType === 'renter' ? <div className={classes.button}>
                                                   <Button
+                                                       size='large'
                                                        onClick={rentItemHandler}
                                                        variant='contained'
                                                        id='rentItem'

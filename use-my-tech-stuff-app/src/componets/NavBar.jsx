@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { setIsEditing } from '../store/actions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,16 +30,17 @@ const useStyles = makeStyles((theme) => ({
      footer: {
        backgroundColor: theme.palette.background.paper,
        padding: theme.spacing(6),
-     }
+     },
+     button: {
+       margin: '2%',
+     },
    }));
 
+   
    const NavBar = () => {
-    const classes = useStyles();
-    const userId = localStorage.getItem('userId')
+     const classes = useStyles();
+     const userId = localStorage.getItem('userId')
 
-    useEffect(() => {
-      console.log(userId)
-    }, [userId])
 
     const logoutHandler = () => {
       localStorage.removeItem('token')
@@ -62,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
                 </Link>
               </Typography>
               <Typography>
+                <Button 
+                  // variant='contained'
+                  color='inherit'
+                  href='/profile'
+                >
+                  My Profile
+                </Button>
                 { 
                 userId ? <Button color="inherit" onClick={logoutHandler} href='/login'>Logout</Button> : <Button color="inherit" href="/login">Login</Button>
                 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -58,7 +57,6 @@ function RentalsList({ listings, isFetching, fetchRentalsList }) {
 
   function inputHandler( event ) {
     setSearchFormValues(event.target.value)
-    console.log(searchFormValues)
   }
 
   useEffect(() => {

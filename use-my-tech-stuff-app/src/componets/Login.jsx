@@ -109,7 +109,6 @@ export default function Login() {
     axiosWithAuth()
       .post('/api/auth/login', formValues)
       .then(response => {
-        console.log(response)
           //response.data.payload is the key(token) that comes from server.js
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('userId', response.data.data.id)

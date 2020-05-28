@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button'
 
-import NavBar from './NavBar'
+
 import { fetchSingleItem, deleteRentalItem, setIsEditing, rentItem } from '../store/actions'
 import { connect } from 'react-redux'
 
@@ -55,14 +55,11 @@ function ListItemDetails(props) {
 
 
      useEffect(() =>{
-          console.log(params.id)
           fetchSingleItem(params.id)
      }, [])
 
           //capture 
      const userId = parseInt(localStorage.getItem('userId'))
-     console.log(userId)
-     console.log(typeof(singleItem.owner_id))
 
      const userType = localStorage.getItem('userType')
 

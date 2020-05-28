@@ -43,8 +43,8 @@ const HomePage = () => {
                marginTop: theme.spacing(4),
           },
           cardGrid: {
-               paddingTop: theme.spacing(8),
-               paddingBottom: theme.spacing(8),
+               // paddingTop: theme.spacing(8),
+               // paddingBottom: theme.spacing(8),
                display: 'flex',
                flexDirection: 'column',
           },
@@ -66,6 +66,11 @@ const HomePage = () => {
                boxShadow: '0 4px 12px 0px rgba(0,0,0,.25)',
                margin: '2%'
              },
+          homePageItem: {
+               display: 'flex',
+               flexDirection: 'column',
+               margin: '5%',
+          }
      }));
 
      const classes = useStyles();
@@ -76,6 +81,8 @@ const HomePage = () => {
           history.push(`/${e.target.id}`)
      }
 
+     const userType = localStorage.getItem('userType')
+
      return (
           <React.Fragment>
                <CssBaseline />
@@ -84,12 +91,13 @@ const HomePage = () => {
                     <div className={classes.heroContent}>
                          <Container maxWidth="sm">
                               <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                                   Home
+                                   Welcome to TechPal
                               </Typography>
                               <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                                   Something short and leading about the collection below—its contents, the creator, etc.
-                                   Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-                                   entirely.
+                              Providing affordable solutions to everyone's technology needs.
+                              </Typography>
+                              <Typography variant="h6" align="center" color="textPrimary" paragraph>
+                              You are currently logged in as {userType === 'renter' ? `a renter` : `an owner`}
                               </Typography>
                          </Container>
                     </div>
@@ -104,6 +112,21 @@ const HomePage = () => {
                                    src='https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png'
                                    title="Profile Pic Placeholder"
                               />
+                              <div className={classes.homePageItem}>
+
+                                   {
+                                        userType === 'owner' ? <div>
+                                   <h3>
+                                        View profile information and tech items that you currently have registered.
+                                   </h3>
+                              </div>
+                              :
+                              <div>
+                                   <h3>
+                                        View profile information and tech items that you currently have rented out.
+                                   </h3>
+                              </div>
+                                   }
                               <Button
                                    type='submit'
                                    variant='contained'
@@ -112,44 +135,67 @@ const HomePage = () => {
                                    id='myprofile'
                                    size='large'
                                    text='Profile'
-                              >
+                                   >
                                    <span id='myprofile'>
                                         Profile
                                    </span>
                               </Button>
+                                   </div>
                          </Card>
+                         { userType === 'owner' ?
                          <Card className={classes.card}>
                               <img 
                                    className={classes.cardMedia}
                                    src='https://images.unsplash.com/photo-1577375774296-1480089cb555?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80'
                                    title="Profile Pic Placeholder"
                               />
+                              <div className={classes.homePageItem}>
+                              <div>
+                                   <h3>
+                                        Do you have tech gear that you'd like to rent out? Add an item for rent here.
+                                   </h3>
+                              </div>
                               <Button
                                    variant='contained'
                                    color='secondary'
                                    onClick={buttonLinkHandler}
                                    id='rentyourtech'
                                    size='large'
-                              ><span id='rentyourtech'>
+                                   ><span id='rentyourtech'>
                               Rent Your Tech
           </span></Button>
+                         </div>
                          </Card>
+                         : null
+                         }
+                    { userType === 'renter' ?
                          <Card className={classes.card}>
                               <img
                                    className={classes.cardMedia}
                                    src='https://images.unsplash.com/photo-1546624156-249875babb27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=799&q=80'
                                    title='computer desk setup'
                                    />
+                              <div className={classes.homePageItem}>
+                              <div>
+                                   <h3>
+                                        See tech items currently available to rent
+                                   </h3>
+                              </div>
                               <Button
                                    size='large'
                                    variant='contained'
                                    color='secondary'
                                    onClick={buttonLinkHandler}
                                    id='rentals'
-                              ><span id='rentals'>
-                              Rentals List
-          </span></Button>
+                                   >
+                                        <span id='rentals'>
+                                             Rentals List
+                                        </span>
+                                   </Button>
+                              </div>
                          </Card>
+                         : null
+                    }
                     </Container>
                </main>
                {/* Footer */}

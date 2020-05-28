@@ -116,6 +116,7 @@ export default function Login() {
           localStorage.setItem('userType', response.data.data.type)
           setIsLoggingIn(false)
           history.push('/')
+          window.location.reload()
       })
       .catch(err => {
         console.log(err)
@@ -223,11 +224,6 @@ export default function Login() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}

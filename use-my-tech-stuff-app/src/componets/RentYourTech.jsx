@@ -99,7 +99,7 @@ function RentYourTech(props) {
   const submitHandler = (event) => {
     event.preventDefault();
     postItem(formValues, ownerId)
-    history.push('/profile')
+    history.push('/rentals')
     setFormValues(initialFormValues)
   }
 

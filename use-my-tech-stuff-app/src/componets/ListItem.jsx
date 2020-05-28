@@ -55,7 +55,7 @@ return (
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+                    image='https://icons.iconarchive.com/icons/martz90/circle-addon2/512/computer-icon.png'
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>

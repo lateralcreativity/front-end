@@ -11,10 +11,11 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Button from '@material-ui/core/Button';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { fetchRentalsList } from '../store/actions'
-import { connect } from 'react-redux'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-import { deleteRentalItem } from '../store/actions'
 import { useParams, useLocation } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { deleteRentalItem } from '../store/actions'
+
 
  
 function Copyright() {
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const UserProfile = ({ fetchRentalsList }) => {
+const UserProfile = ({ fetchRentalsList, deleteRentalItem }) => {
     const classes = useStyles();
     const params = useParams()
     const location = useLocation()
@@ -82,20 +83,23 @@ const UserProfile = ({ fetchRentalsList }) => {
         axiosWithAuth()
         .get(`https://techpal.herokuapp.com/api/users/${userToGet}`)
         .then(resolve => {
-            // console.log(resolve.data)
+            console.log(resolve.data.listings)
             setUserData(resolve.data.user)
             setListingsData(resolve.data.listings)
         })
         .catch(error => {
             console.log(error, 'Error')
         })
-    }, [])
+    },[])
+
+
 
     const ownerId = localStorage.getItem('userId')
 
-    const deleteHandler = e => {
-        e.preventDefault()
-   }
+//     const deleteHandler = e => {
+//         e.preventDefault()
+//         deleteRentalItem()
+//    }
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -151,7 +155,11 @@ const UserProfile = ({ fetchRentalsList }) => {
                                         {
                                              ownerId == listing.owner_id ?
                                         <Button
-                                             onClick={deleteHandler}
+                                             onClick={e => {
+                                                e.preventDefault() 
+                                                deleteRentalItem(listing.id)
+                                                
+                                             }}
                                              id='deleteButton'
                                         >
                                              <span id='deleteButton'>
@@ -184,5 +192,5 @@ const UserProfile = ({ fetchRentalsList }) => {
 
 export default connect(
     null,
-    { fetchRentalsList }
+    { fetchRentalsList, deleteRentalItem }
 )(UserProfile)

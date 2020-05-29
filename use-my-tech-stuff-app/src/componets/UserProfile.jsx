@@ -31,12 +31,14 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(15)
+        marginTop: theme.spacing(15),
+        width: theme.spacing(50)
     },
     listingContainer: {
         padding: theme.spacing(2),
         margin: 'auto',
         maxWidth: 500,
+        width: theme.spacing(35)
     },
     root: {
         flexGrow: 1,
@@ -155,8 +157,8 @@ const UserProfile = ({ fetchRentalsList, deleteRentalItem }) => {
                                              <img className={classes.img} alt="complex" src="https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
                                         </ButtonBase>
                                    </Grid> */}
-                                   <Grid item xs={12} lg container>
-                                            <Grid item xs container direction="column" spacing={2}>
+                                   <Grid item xs={12} lg container direction="column" alignItems="center">
+                                            <Grid item xs container direction="column" spacing={2} >
                                                 <Grid item xs className={classes.itemDetails}>
                                                     <Typography gutterBottom variant="h6">
                                                         {listing.name}
@@ -168,10 +170,8 @@ const UserProfile = ({ fetchRentalsList, deleteRentalItem }) => {
                                                         {listing.exchange_method}
                                                     </Typography>
                                                 </Grid>
+                                                <Typography variant="subtitle1">${listing.price_per_day_in_dollars}/day</Typography>
                                             </Grid>
-                                        <Grid item className={classes.button}>
-                                             <Typography variant="subtitle1">${listing.price_per_day_in_dollars}/day</Typography>
-                                        </Grid>
                                         {
                                              ownerId == listing.owner_id ?
                                              <Button

@@ -14,8 +14,8 @@ You can also choose to rent your items out if you sign up as an owner account.
 
 Technologies I used include 
 -
-React
-React Router
-Material Ui
-Yup
-Axios
+* React
+* React Router
+* Material Ui
+* Yup
+* Axios
